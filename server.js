@@ -39,7 +39,7 @@ e.use(app.passport.session()); // persistent login sessions
 
 app.mongoose.connect(app.url);
 
-e.use(express.static(__dirname + '/public'));
+e.use('/static', express.static(__dirname + '/public'));
 
 app.server.listen(port, function() {
 	console.log('Listening on port ' + port + '\n');
@@ -78,3 +78,8 @@ e.get('/auth/twitter/callback',function(req, res, next){
   })(req, res, next)
 }
 );
+
+//Ben's special file
+e.get('/map', function(req, res){
+	res.sendFile(__dirname + '/public/map.html');
+});
