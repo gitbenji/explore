@@ -20,7 +20,7 @@ module.exports = function(app) {
       var pointsArr = req.body.points;
       var username = req.body.username;
 
-      var user = findUser(username)
+      findUser(username)
       .then(function(user) {
         console.log(pointsArr);
         var newUser = appendPoints(user, pointsArr);
@@ -40,8 +40,7 @@ module.exports = function(app) {
 
 
   function appendPoints(userObject, newPoints) {
-    var pointsArr = userObject.points;
-    pointsArr.push(newPoints);
+    var pointsArr = userObject.points.concat(newPoints);
 
     var query = { username: userObject.username };
 
@@ -58,7 +57,7 @@ module.exports = function(app) {
 
   // query user based on username, return userObject
   function findUser(username) {
-    var dfd = Q.defer();
+    var dfd = app.Q.defer();
     var userObject = new Object();
 
     app.models.User.findOne({ username: username }, function(err, doc) {
@@ -66,13 +65,8 @@ module.exports = function(app) {
         console.log(err);
         dfd.reject(err);
       }
-      if (doc) {
-        console.log(doc);
-        userObject = doc;
-        return true;
-      } else {
-        return false;
-      }
+      console.log(doc);
+      userObject = doc;
       dfd.resolve(userObject);
     });
     return dfd.promise;

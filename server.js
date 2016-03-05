@@ -3,6 +3,7 @@ var app = {};
 var express = require('express');
 var http = require('http');
 
+app.Q = require('q');
 app.passport = require("passport");
 app.TwitterStrategy = require('passport-twitter').Strategy;
 app.MongoClient = require('mongodb').MongoClient;
@@ -30,8 +31,8 @@ app.server = app.server = http.createServer(e);
 
 
 e.use(cookieParser()); // read cookies (needed for auth)
-e.use(bodyParser.urlencoded({ extended: true }));
-e.use(bodyParser.json()); // get information from html forms
+e.use(bodyParser.urlencoded({ parameterLimit: 10000, limit: '50mb', extended: true }));
+e.use(bodyParser.json({parameterLimit: 10000, limit: '50mb'})); // get information from html forms
 // required for passport
 e.use(session({ secret: 'mangohacks' })); // session secret
 e.use(app.passport.initialize());
@@ -79,7 +80,7 @@ e.get('/auth/twitter/callback',function(req, res, next){
 }
 );
 
-//Ben's special file
+// Ben's special file
 e.get('/map', function(req, res){
 	res.sendFile(__dirname + '/public/map.html');
 });
