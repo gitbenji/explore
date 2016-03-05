@@ -16,6 +16,13 @@ module.exports = function(app) {
 
     // called to store data received from client tracking into database
     createTrip: function(req, res) {
+      // array of all points sent by
+      var pointsArr = req.points;
+
+      // run through each point in array and do append it to the user object
+      pointsArr.forEach(function (point) {
+
+      });
 
       // response with success or fail of data storing
       res.send('createTrip');
