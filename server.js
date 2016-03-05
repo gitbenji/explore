@@ -18,6 +18,7 @@ app.explore = require('./explore.js')(app);
 app.geo = require('./geo.js')(app);
 app.models = require('./models.js')(app);
 
+app.url = 'mongodb://localhost:27017/explore';
 
 var port = 8080;
 
@@ -36,12 +37,14 @@ e.use(session({ secret: 'mangohacks' })); // session secret
 e.use(app.passport.initialize());
 e.use(app.passport.session()); // persistent login sessions
 
+app.mongoose.connect(app.url);
 
 e.use(express.static(__dirname + '/public'));
 
 app.server.listen(port, function() {
 	console.log('Listening on port ' + port + '\n');
 });
+
 
 
 /**
@@ -57,7 +60,7 @@ e.post('/tracking', app.tracking.createTrip);
 e.get('/explore/loop', app.explore.createLoop);
 
 // POST request to find/create user and pass them through auth
-e.post('/auth', app.auth.upsertUser);
+e.post('/newUser', app.auth.upsertUser);
 
 //--------------------TWITTER--------------------
 e.get('/auth/twitter', function(req, res, next){
