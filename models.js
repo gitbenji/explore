@@ -12,8 +12,6 @@ module.exports = function(app){
   var User = app.mongoose.model('User', userSchema);
 
 
-
-
   var models = {};
   models.User = User;
 
