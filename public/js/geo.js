@@ -6,7 +6,7 @@ var map = L.mapbox.map('map', 'mapbox.streets')
   var featureLayer = L.mapbox.featureLayer()
       .addTo(map);
 
-  featureLayer.loadURL('http://d5c866b1.ngrok.io/static/points.geojson');
+  featureLayer.loadURL('http://d5c866b1.ngrok.io/static/points.json');
 
 var data = new Object();
 data.username = "persian_cam";
