@@ -1,6 +1,6 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiYmVuamFtaW53dGhvcm50b24iLCJhIjoiUEpaRDAwdyJ9.LvHOBMyZRTqugCDQOhBZBw';
 
-L.mapbox.map('map', 'mapbox.streets')
+var map = L.mapbox.map('map', 'mapbox.streets')
   .setView([37.8, -96], 4)
 
 var data = new Object();
@@ -21,6 +21,10 @@ data.username = "persian_cam";
 
 function plotMap(geoArray) {
   geoArray.forEach(function(geojson) {
-    
+
   });
+}
+
+function matt(param) {
+  document.getElementById("call").innerHTML = param;
 }

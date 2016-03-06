@@ -1,36 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=utf-8 />
-<title>Load GeoJSON</title>
-<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
-<style>
-  body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
-  #call { position: absolute; top: 0; left: 20px;}
-</style>
+  <meta charset=utf-8 />
+  <title>Load GeoJSON</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  <!-- <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script> -->
+  <link href='static/bower_components/mapbox.js/mapbox.css' rel='stylesheet' />
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+    #call { position: absolute; top: 0; left: 20px;}
+  </style>
 </head>
 <body>
-<p id="call">Hello</p>
-
-<script>
-function matt(param){document.getElementById("call").innerHTML = "MAPPPPPS!";}
-</script>
-
-<div id='map'></div>
-<!-- <script src='static/js/script.js'></script> -->
-<script src='../bower_components/mapbox.js/mapbox.js'></script>
-<script src='static/js/geo.js'></script>
-  <script>
-    function matt(param){document.getElementById("call").innerHTML = param;}
-  </script>
-  <div id='map'></div>
   <p id="call">Hello</p>
-
+  <div id='map'></div>
+  <!-- <script src='static/js/script.js'></script> -->
+  <script src='static/bower_components/mapbox.js/mapbox.js'></script>
+  <script src='static/js/geo.js'></script>
   <script src='static/js/script.js'></script>
 </body>
 </html>
