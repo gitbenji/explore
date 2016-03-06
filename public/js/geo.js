@@ -12,9 +12,15 @@ data.username = "persian_cam";
       data:JSON.stringify(data),
       contentType: "application/json",
       success: function(res) {
-        console.log(res);
+        plotMap(res);
       },
       error: function() {
         console.log("fuck it");
       }
     });
+
+function plotMap(geoArray) {
+  geoArray.forEach(function(geojson) {
+    
+  });
+}
