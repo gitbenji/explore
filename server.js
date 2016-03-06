@@ -8,6 +8,7 @@ app.passport = require("passport");
 app.TwitterStrategy = require('passport-twitter').Strategy;
 app.MongoClient = require('mongodb').MongoClient;
 app.mongoose = require('mongoose');
+// app.mapbox = require('mapbox.js');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
