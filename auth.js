@@ -26,7 +26,7 @@ module.exports = function(app) {
       if (err)
         return console.log(err);
       if (doc)
-        return console.log('exists';
+        return console.log('exists');
       user.save(function(err, doc) {
         if (err)
           console.log(err);
