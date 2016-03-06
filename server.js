@@ -51,11 +51,12 @@ app.server.listen(port, function() {
 /**
   * Routes
   */
-// GET request to send data within tile to client
-e.get('/tracking/tile', app.tracking.createTile);
 
 // POST request to store points of a trip
 e.post('/tracking', app.tracking.createTrip);
+
+// GET request to send data within tile to client
+e.get('/tracking/data', app.tracking.giveData);
 
 // GET request to send loop/route to client
 e.get('/explore/loop', app.explore.createLoop);

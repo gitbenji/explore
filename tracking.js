@@ -4,17 +4,16 @@ module.exports = function(app) {
   // called by server.js to handle all info about storing and displaying user data
   var tracking = {
 
-    // called to query user data
+    // called to query data for user
     giveData: function(req, res) {
       console.log(req.body);
 
-
-
+      res.send('tile');
     },
 
     // called to store data received from client tracking into database
     createTrip: function(req, res) {
-      console.log(req.body);
+
       // array of all points sent by
       var pointsArr = req.body.points;
       var username = req.body.username;
@@ -26,7 +25,8 @@ module.exports = function(app) {
         console.log(newUser);
       }, function(err) {
         console.log(err);
-      });
+      })
+
 
       // res.send('createTrip');
     }
