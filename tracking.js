@@ -6,9 +6,17 @@ module.exports = function(app) {
 
     // called to query data for user
     giveData: function(req, res) {
-      console.log(req.body);
+      var username = req.body.username;
 
-      res.send('tile');
+      findUser(username)
+      .then(function(user) {
+        res.send(user.points);
+      },
+      function(err) {
+        if (err)
+          console.log(err);
+      })
+
     },
 
     // called to store data received from client tracking into database
