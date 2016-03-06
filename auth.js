@@ -9,8 +9,6 @@ module.exports = function(app) {
       var userObject = new Object();
       userObject.username = req.body.username;
 
-      console.log(userObject);
-
       saveUser(userObject);
 
       // response with success/fail of user authentication
@@ -24,11 +22,16 @@ module.exports = function(app) {
       username: userObject.username
     });
 
-    console.log(user, userObject);
-    user.save(function(err) {
+    app.models.User.findOne({ username: user.username }, function(err, doc) {
       if (err)
         return console.log(err);
-      return console.log('saved', user);
+      if (doc)
+        return console.log('exists';
+      user.save(function(err, doc) {
+        if (err)
+          console.log(err);
+        console.log('saved');
+      });
     });
   }
 
