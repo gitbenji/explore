@@ -3,6 +3,11 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiYmVuamFtaW53dGhvcm50b24iLCJhIjoiUEpaRDAwdyJ9.
 var map = L.mapbox.map('map', 'mapbox.streets')
   .setView([37.8, -96], 4)
 
+  var featureLayer = L.mapbox.featureLayer()
+      .addTo(map);
+
+  featureLayer.loadURL('http://d5c866b1.ngrok.io/static/points.geojson');
+
 var data = new Object();
 data.username = "persian_cam";
 
