@@ -70,7 +70,7 @@ app.server.listen(port, function() {
   */
 
 // POST request to store points of a trip
-e.post('/tracking', app.tracking.createTrip);
+e.post('/tracking', app.tracking.storeTrip);
 
 // GET request to send data within tile to client
 e.post('/tracking/data', app.tracking.giveData);
@@ -81,22 +81,7 @@ e.get('/explore/loop', app.explore.createLoop);
 // POST request to find/create user and pass them through auth
 e.post('/newUser', app.auth.upsertUser);
 
-//--------------------TWITTER--------------------
-e.get('/auth/twitter', function(req, res, next){
-  console.log('yo /auth/twitter')
-    app.passport.authenticate('twitter')(req, res, next)
-  }
-  );
 
-// handle the callback after twitter has authenticated the user
-e.get('/auth/twitter/callback',function(req, res, next){
-  console.log('yo /auth/twitter/callback')
-  app.passport.authenticate('twitter', {
-      successRedirect : '/profile',
-      failureRedirect : '/'
-  })(req, res, next)
-}
-);
 
 // Ben's special file
 e.get('/map', function(req, res){

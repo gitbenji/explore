@@ -20,7 +20,7 @@ module.exports = function(app) {
     },
 
     // called to store data received from client tracking into database
-    createTrip: function(req, res) {
+    storeTrip: function(req, res) {
 
       // array of all points sent by
       var pointsArr = req.body.points;
