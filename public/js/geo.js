@@ -35,8 +35,6 @@ var map = L.mapbox.map('map', 'mapbox.light');
       });
   });
 
-console.log("here");
-
 var data = new Object();
 data.username = "persian_cam";
 
@@ -46,17 +44,55 @@ data.username = "persian_cam";
       data:JSON.stringify(data),
       contentType: "application/json",
       success: function(res) {
-        plotMap(res);
+        console.log(res);
+        plotMapBackwards(res);
       },
       error: function() {
-        console.log("fuck it");
+        console.log("oh no it");
       }
     });
 
-function plotMap(geoArray) {
-  geoArray.forEach(function(geojson) {
 
-  });
+function plotMapBackwards(geoArray) {
+  console.log(geoArray);
+
+    //var json = JSON.parse(geoArray);
+    var correctArray = [];
+    for(var i = 0; i < 1; i++){
+      //console.log(geoArray[i])
+      var arr = [geoArray[i].lon, geoArray[i].lat];
+      correctArray.push(arr);
+    }
+
+    console.log(correctArray)
+
+    correctArray = [
+      ['-80.37865877151489', '25.764377979061884'],
+      ['-80.37820547819138', '25.764361070081556']
+    ]
+
+    //heat = L.heatLayer(correctArray, { maxZoom: 12 }).addTo(map);
+
+    //plotBoth(correctArray);
+};
+
+function plotBoth(flippedArr){
+
+    var newArr = saveArray.concat(flippedArr);
+    heat = L.heatLayer(newArr, { maxZoom: 12 }).addTo(map);
+}
+
+var saveArray;
+
+function plotMap(geoArray) {
+  console.log(geoArray);
+
+    var json = JSON.parse(geoArray);
+    console.log(json)
+
+    saveArray = geoArray;
+    heat = L.heatLayer(geoArray, { maxZoom: 12 }).addTo(map);
+
 };
 
 function matt(param) {

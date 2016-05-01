@@ -16,7 +16,9 @@ module.exports = function(app) {
 
       var total_distance = establishDistance(duration, transMethod);
 
-      var coords = startingCoords;
+      var coords = new Object();
+      coords.lon = startingCoords.lon;
+      coords.lat = startingCoords.lat;
 
       var quadrants = ['q1', 'q2', 'q3', 'q4'];
       var invQuadrants = ['q3', 'q4', 'q1', 'q2'];
@@ -27,8 +29,20 @@ module.exports = function(app) {
           invQuadrants.splice(index, 1);
         }
       });
-      console.log(startingQuadrant, invQuadrants);
-      round1(startingQuadrant, invQuadrants, startingCoords, coords)
+
+      // gets new coords
+      // coords = round1(startingQuadrant, coords);
+      //
+      // var directionArr = [];
+      // var directionOut;
+      // var directionBack;
+      // directionOut = getDirections(startingCoords, coords)
+      // .then(function())
+      // directionBack = getDirections(coords, startingCoords);
+      //
+      //
+      // directionArr.concat(directionOut.routes, directionBack.routes);
+      // console.log(directionArr);
 
 
       // var bbox = generateBbox(coords);
@@ -40,16 +54,15 @@ module.exports = function(app) {
       // // response with loop route starting and ending at current location
       // res.send(hexgrid);
     }
+  }
+  return explore;
 
-  };
-
-  function round1(startingQuadrant, invQuadrants, startingCoords, coords) {
-    var max = 0.12;
-    var min = 0.06;
-    console.log(coords)
+  function round1(startingQuadrant, coords) {
+    var max = 0.018 ;
+    var min = 0.001;
     if (startingQuadrant == 'q1') {
-      coords.lat = coords.lat + 1;
-      coords.lon = coords.lon + 1;
+      coords.lat = coords.lat + (Math.random() * (max - min) + min);
+      coords.lon = coords.lon + (Math.random() * (max - min) + min);
     } else if (startingQuadrant == 'q2') {
       coords.lat = coords.lat + (Math.random() * (max - min) + min);
       coords.lon = coords.lon - (Math.random() * (max - min) + min);
@@ -60,19 +73,26 @@ module.exports = function(app) {
       coords.lat = coords.lat - (Math.random() * (max - min) + min);
       coords.lon = coords.lon + (Math.random() * (max - min) + min);
     }
+    return (coords);
+  }
 
-    console.log(coords, startingCoords);
-
-    app.mapboxClient.getDirections([
+  function getDirections(startingCoords, coords) {
+    var dfd = app.Q.defer();
+    app.mapboxClient.getDirections(
+    [
       { latitude: startingCoords.lat, longitude: startingCoords.lon },
-      { latitude: coords.lat, longitude: coords.lon }],
-      function(err, res) {
-        console.log(res);
-      });
-    }
-
-  return explore;
-};
+      { latitude: coords.lat, longitude: coords.lon }
+    ],
+    { profile: 'mapbox.walking' },
+    function(err, res) {
+      if(err){
+        dfd.reject(err);
+      }
+      console.log(res);
+      dfd.resolve(res);
+    });
+    return dfd.promise;
+  }
 
 
 function establishDistance(duration, transMethod) {
@@ -96,3 +116,4 @@ function establishDistance(duration, transMethod) {
 //
 //   return bbox;
 // }
+}
